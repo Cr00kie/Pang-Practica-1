@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     float borders = 7.25f;
     [SerializeField]
     float floorHeight = 4.75f;
+    [SerializeField]
+    SpriteRenderer spriteRenderer;
 
     // Update is called once per frame
     void Update()
@@ -21,6 +23,9 @@ public class Movement : MonoBehaviour
             // Always stays in the same y coord
             , floorHeight
             , 0f);
-        
+
+        if (Input.GetAxis("Horizontal") > 0) { spriteRenderer.flipX = true; }
+        if (Input.GetAxis("Horizontal") < 0) { spriteRenderer.flipX = false; }
+
     }
 }
