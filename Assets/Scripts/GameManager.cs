@@ -25,13 +25,13 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    Canvas canvas;
+    UIManager uiManager;
 
     private int bubbleCount;
 
     public void OnPlayerDamaged(GameObject playerDamaged)
     {
-        canvas.GetComponent<UIManager>().Inform("Has Perdido!");
+        uiManager.GetComponent<UIManager>().Inform("Has Perdido!");
         Destroy(playerDamaged);
     }
 
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         bubbleCount--;
         if( bubbleCount == 0)
         {
-            canvas.GetComponent<UIManager>().Inform("Has Ganado!");
+            uiManager.GetComponent<UIManager>().Inform("Has Ganado!");
         }
     }
 }
