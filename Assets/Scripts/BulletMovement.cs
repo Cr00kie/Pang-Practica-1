@@ -23,10 +23,11 @@ public class BulletMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Blowup script = collision.gameObject.GetComponent(typeof(Blowup)) as Blowup;
+        Blowup script = collision.gameObject.GetComponent<Blowup>();
         if (script != null)
         {
             script.Burst();
+            Destroy(gameObject);
         }
     }
 }

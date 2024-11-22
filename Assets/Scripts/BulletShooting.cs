@@ -14,6 +14,5 @@ public class BulletShooting : MonoBehaviour
         {
             Instantiate(bullet, transform.position, transform.rotation);
         }
-
     }
 }

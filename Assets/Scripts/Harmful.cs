@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Harmful : MonoBehaviour
 {
-    private void Start()
-    {
-        GameManager.GMInstance.OnBubbleCreated();
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
