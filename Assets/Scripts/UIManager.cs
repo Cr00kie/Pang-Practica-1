@@ -20,14 +20,7 @@ public class UIManager : MonoBehaviour
     }
     public void Update()
     {
-        
-        double time = GameManager.GMInstance.GetTime()*1000; //Obtenemos el tiempo del contador y lo pasamos a milisegundos (para tener la mayor precisión por si queremos que cuente los milisegundos)
-        int min = (int)(time / 60000); //Cálculo de los minutos
-        int sec = (int)(time % 60000 / 1000); //Calculo de los segundos
-        //int milSec = (int)((time%60000)%1000); //Calculo de los milisegundos
-
-        timer.text = min.ToString("D2") + " : " + sec.ToString("D2"); //CONTADOR QUE MUESTRA (MM) : (SS)
-        //timer.text = min.ToString("D2") + " : " + sec.ToString("D2") + " : " + milSec.ToString("D3"); //VERSION QUE MUESTRA LOS MILISEGUNDOS
+        timer.text = GameManager.GMInstance.timer.GetTimeAsMMSS();
     }
     public void Inform(string message)
     {
