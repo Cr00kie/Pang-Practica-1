@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     public void Start()
     { //Por si está desactivado lo activo para que se vea sí o sí
+        GameManager.GMInstance.SetUIManager(this);
+        GameManager.GMInstance.StartGame();
         gameoverUI.SetActive(false);
     }
     public void Update()
@@ -27,5 +30,9 @@ public class UIManager : MonoBehaviour
         gameoverUI.SetActive(true);
         title.text = message;
         Debug.Log(message);
+    }
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

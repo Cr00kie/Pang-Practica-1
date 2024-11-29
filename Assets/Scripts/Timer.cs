@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private double seconds = 0;
+    public double Seconds { get; private set; } = 0;
     bool isCounting = false;
+    public double BestTime { get; private set; } = 0; // Esto es un getter y un setter de la propiedad BestTime, permite acceder a la variable publicamente pero no modificarla 
+    public void UpdateBestTime()
+    {
+        if (BestTime == 0 || Seconds < BestTime) //Si el nuevo tiempo es mejor ó no hay un tiempo registrado que el anterior record se convierte en el record
+        {
+            BestTime = Seconds;
+        }
+    }
 
     public void StartTimer() //El contador sigue contando
     {
@@ -18,18 +26,13 @@ public class Timer : MonoBehaviour
 
     public void ResetTimer() //Reinicia el contador
     {
-        seconds = 0;
-    }
-
-    public double GetTime() //"Getter" que permite acceder al valor de seconds (se podría hacer una property con { get; private set;})
-    {
-        return seconds;
+        Seconds = 0;
     }
 
     public string GetTimeAsMMSS()
     {
-        int min = (int)(seconds / 60); //Cálculo de los minutos
-        int sec = (int)(seconds % 60); //Calculo de los segundos
+        int min = (int)(Seconds / 60); //Cálculo de los minutos
+        int sec = (int)(Seconds % 60); //Calculo de los segundos
 
         return min.ToString("D2") + " : " + sec.ToString("D2"); //CONTADOR QUE MUESTRA (MM) : (SS)    ".ToString("Dn")" formatea el número poniendo poniendo los 0 restantes hasta llegar al número de digitos deseados
     }
@@ -37,7 +40,7 @@ public class Timer : MonoBehaviour
     {
         //Todo esto se podría hacer en una línea con un operador ternario pero lo dejo así para que sea más fácil de ver
         string ret;
-        if (s != null) //Comprobamos que s no es nulo
+        if (s != 0) //Comprobamos que s no es nulo
         {
             int min = (int)(s / 60); //Cálculo de los minutos
             int sec = (int)(s % 60); //Calculo de los segundos
@@ -52,7 +55,7 @@ public class Timer : MonoBehaviour
     {
         if (isCounting) //Si counting es false entonces deja de contar
         {
-            seconds += Time.deltaTime;
+            Seconds += Time.deltaTime;
         }
     }
 }
