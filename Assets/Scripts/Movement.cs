@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalMove = Input.GetAxis("Horizontal");
+        float horizontalMove = Input.GetAxisRaw("Horizontal");
 
         animator.SetBool("IsRunning", Mathf.Abs(horizontalMove) > 0.2 ); //Si el pje se mueve (lo miro en valor absoluto pq me da igual la dirección) cambia a la animación de Running
         //0.2 me ha parecido que no tarda mucho en volver a Idle y se siente responsivo para empezar a correr
