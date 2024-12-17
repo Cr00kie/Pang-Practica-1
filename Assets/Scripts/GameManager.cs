@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
         else
         {
             GMInstance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        
     }
     #endregion
 
