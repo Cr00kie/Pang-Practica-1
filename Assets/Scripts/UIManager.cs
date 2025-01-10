@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     }
     public void Update()
     {
-        timer.text = GameManager.GMInstance.timer.GetTimeAsMMSS();
+        timer.text = GameManager.GMInstance.Timer.GetTimeAsMMSS();
     }
     public void Inform(string message)
     {

@@ -28,18 +28,17 @@ public class Blowup : MonoBehaviour
     {
         this.initialForceDirection = initialForceDirection;
         this.initialForceMagnitud = initialForceMagnitud;
-        this.gameObject.transform.localScale = new Vector3(size/2, size/2);
+        this.gameObject.transform.localScale = new Vector3(size, size);
     }
     public int Split()
     {
         if (gameObject.transform.localScale.x > minSize) //Si el tamaño de la pompa es más grande que el minSize entonces permitimos que se vuelvan a dividir
         {
-            GameObject pompa1 = GameObject.Instantiate(gameObject);
-            GameObject pompa2 = GameObject.Instantiate(gameObject);
+            Blowup pompa1 = GameObject.Instantiate<Blowup>(this);
+            Blowup pompa2 = GameObject.Instantiate<Blowup>(this);
 
-            //No hace falta comprobar que no se null porque sabemos que siempre lo deben de tener
-            pompa1.GetComponent<Blowup>().Init(new Vector3(1, 1, 0), 5, gameObject.transform.localScale.x);
-            pompa2.GetComponent<Blowup>().Init(new Vector3(-1, 1, 0), 5, gameObject.transform.localScale.x);
+            pompa1.Init(new Vector3(1, 1, 0), 5, gameObject.transform.localScale.x/2);
+            pompa2.Init(new Vector3(-1, 1, 0), 5, gameObject.transform.localScale.x/2);
             
             return 2; //Devolvemos 2 porque hemos creado dos pompas
         }
