@@ -33,28 +33,28 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] 
     private Timer timer;
-    //Getter para que el componente esté protegido
-    public Timer Timer
+    public string GetCurrentTimeAsMMSS()
     {
-        get
-        {
-            return timer;
-        }
+        return timer.GetCurrentTimeAsMMSS();
+    }
+    public string GetBestTimeAsMMSS()
+    {
+        return timer.GetBestTimeAsMMSS();
     }
 
     private int bubbleCount;
 
     public void StartGame() //Este método se debe llamar al entrar en la escena para que así se reestablezcan los valores adecuados
     {
-        Timer.ResetTimer(); //Al entrar en la escena se reinicia el reloj a 0
-        Timer.StartTimer(); //Comienza a contar el reloj
+        timer.ResetTimer(); //Al entrar en la escena se reinicia el reloj a 0
+        timer.StartTimer(); //Comienza a contar el reloj
         bubbleCount = FindObjectsByType(typeof(Blowup), FindObjectsSortMode.None).Length; // Devuelve un array de objetos del tipo Blowup (serían las pompas), y guardo el tamaño del array en la variable
         Debug.Log($"{bubbleCount} bubbles");
     }
 
     public void OnPlayerDamaged(GameObject playerDamaged)
     {
-        Timer.StopTimer();
+        timer.StopTimer();
         uiManager.Inform("Has Perdido!");
         Destroy(playerDamaged);
     }
@@ -64,9 +64,9 @@ public class GameManager : MonoBehaviour
         Destroy(damagedBubble.gameObject);
         if ( bubbleCount == 0)
         {
-            Timer.StopTimer(); // Se para el contador
+            timer.StopTimer(); // Se para el contador
             uiManager.Inform("Has Ganado!"); // Se cambia la interfaz para que muestre el texto y el boton de continuar
-            Timer.UpdateBestTime(); // Se actualiza le timepo record
+            timer.UpdateBestTime(); // Se actualiza le timepo record
         }
         Debug.Log($"{bubbleCount} bubbles");
     }

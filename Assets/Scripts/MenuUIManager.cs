@@ -25,7 +25,7 @@ public class MenuUIManager : MonoBehaviour
         Debug.Log("Cambiando el texto del record...");
         if (GameManager.GMInstance != null)
         { //Si no hay tiempo record el string se quedará vacío
-            recordText.text = "Record: " + GameManager.GMInstance.Timer.GetTimeAsMMSS(GameManager.GMInstance.Timer.BestTime); //Uso el método de Timer para formatear el string
+            recordText.text = "Record: " + GameManager.GMInstance.GetBestTimeAsMMSS(); //Uso el método de Timer para formatear el string
         }
         else recordText.text = "Record: -- : --"; //Si no hay un GM lo pensamos como que no hay un tiempo registrado
     }

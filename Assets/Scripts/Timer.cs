@@ -1,17 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public double Seconds { get; private set; } = 0;
+    private double seconds = 0;
+    private double bestTime = 0;
     bool isCounting = false;
-    public double BestTime { get; private set; } = 0; // Esto es un getter y un setter de la propiedad BestTime, permite acceder a la variable publicamente pero no modificarla 
+   
     public void UpdateBestTime()
     {
-        if (BestTime == 0 || Seconds < BestTime) //Si el nuevo tiempo es mejor ó no hay un tiempo registrado que el anterior record se convierte en el record
+        if (bestTime == 0 || seconds < bestTime) //Si el nuevo tiempo es mejor ó no hay un tiempo registrado que el anterior record se convierte en el record
         {
-            BestTime = Seconds;
+            bestTime = seconds;
         }
     }
 
@@ -26,17 +25,18 @@ public class Timer : MonoBehaviour
 
     public void ResetTimer() //Reinicia el contador
     {
-        Seconds = 0;
+        seconds = 0;
     }
-
-    public string GetTimeAsMMSS()
+    public string GetBestTimeAsMMSS()
     {
-        int min = (int)(Seconds / 60); //Cálculo de los minutos
-        int sec = (int)(Seconds % 60); //Calculo de los segundos
-
-        return min.ToString("D2") + " : " + sec.ToString("D2"); //CONTADOR QUE MUESTRA (MM) : (SS)    ".ToString("Dn")" formatea el número poniendo poniendo los 0 restantes hasta llegar al número de digitos deseados
+        return GetTimeAsMMSS(bestTime);
     }
-    public string GetTimeAsMMSS(double? s) //Otro método para que me devuelva el mismo formato si yo le paso segundos como parámetro
+
+    public string GetCurrentTimeAsMMSS()
+    {
+        return GetTimeAsMMSS(seconds);
+    }
+    private string GetTimeAsMMSS(double? s) //Otro método para que me devuelva el mismo formato si yo le paso segundos como parámetro
     {
         //Todo esto se podría hacer en una línea con un operador ternario pero lo dejo así para que sea más fácil de ver
         string ret;
@@ -50,12 +50,11 @@ public class Timer : MonoBehaviour
         return ret;
     }
 
-
     void Update()
     {
         if (isCounting) //Si counting es false entonces deja de contar
         {
-            Seconds += Time.deltaTime;
+            seconds += Time.deltaTime;
         }
     }
 }
